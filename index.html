@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-FDT Platform | Environmental & Financial Digital Twin</title>
+    <meta name="description" content="AI-powered platform for sustainable urban development in India">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with Animated Background -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-globe"></i>
+                    <h1>E-FDT Platform</h1>
+                </div>
+                <p class="tagline">Environmental & Financial Digital Twin for Sustainable Development</p>
+                <p class="subtitle">🚀 AI-Powered Site Selection | 💎 Carbon Credit Verification | 🌡️ Climate Resilience Testing</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Premium Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <div class="logo-section">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-leaf"></i>
+                        <span>E-FDT</span>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-sliders-h"></i> Configuration</h3>
+
+                <div class="form-group">
+                    <label for="citySelect"><i class="fas fa-city"></i> SELECT CITY</label>
+                    <select id="citySelect" class="form-control">
+                        <option value="">Choose a city...</option>
+                        <option value="Mumbai">🏙️ Mumbai</option>
+                        <option value="Delhi">🏛️ Delhi</option>
+                        <option value="Bangalore">💻 Bangalore</option>
+                        <option value="Hyderabad">🕌 Hyderabad</option>
+                        <option value="Chennai">🌊 Chennai</option>
+                        <option value="Kolkata">🎭 Kolkata</option>
+                        <option value="Pune">🎓 Pune</option>
+                        <option value="Ahmedabad">🕉️ Ahmedabad</option>
+                        <option value="Jaipur">🏰 Jaipur</option>
+                        <option value="Surat">💎 Surat</option>
+                        <option value="Lucknow">🍽️ Lucknow</option>
+                        <option value="Kanpur">🏭 Kanpur</option>
+                        <option value="Nagpur">🍊 Nagpur</option>
+                        <option value="Indore">🏢 Indore</option>
+                        <option value="Thane">🏘️ Thane</option>
+                        <option value="Bhopal">🌳 Bhopal</option>
+                        <option value="Visakhapatnam">⚓ Visakhapatnam</option>
+                        <option value="Patna">📚 Patna</option>
+                        <option value="Vadodara">🎨 Vadodara</option>
+                        <option value="Ghaziabad">🏗️ Ghaziabad</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="greenThreshold">
+                        <i class="fas fa-tree"></i> GREEN ACCESS THRESHOLD
+                        <span class="threshold-value" id="thresholdValue">15</span> MIN
+                    </label>
+                    <input type="range" id="greenThreshold" class="slider" min="5" max="30" value="15">
+                    <div class="slider-labels">
+                        <span>5 min</span>
+                        <span>30 min</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="projectType"><i class="fas fa-building"></i> PROJECT TYPE</label>
+                    <select id="projectType" class="form-control">
+                        <option value="Affordable Housing">🏘️ Affordable Housing</option>
+                        <option value="Green Retrofit">♻️ Green Retrofit</option>
+                        <option value="Community Hub">🏛️ Community Hub</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="complianceFramework"><i class="fas fa-clipboard-check"></i> COMPLIANCE</label>
+                    <select id="complianceFramework" class="form-control">
+                        <option value="Indian Green Building">🇮🇳 Indian Green Building</option>
+                        <option value="LEED India">⭐ LEED India</option>
+                        <option value="India Net Zero 2070">🌱 India Net Zero 2070</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="climateScenario"><i class="fas fa-temperature-high"></i> CLIMATE SCENARIO</label>
+                    <select id="climateScenario" class="form-control">
+                        <option value="Baseline">📊 Baseline</option>
+                        <option value="IPCC 1.5°C">🌡️ IPCC 1.5°C</option>
+                        <option value="IPCC 2°C">🔥 IPCC 2°C</option>
+                        <option value="IPCC 3°C">⚠️ IPCC 3°C</option>
+                        <option value="4°C+">🚨 4°C+</option>
+                    </select>
+                </div>
+
+                <button class="btn-primary" id="runAnalysisBtn">
+                    <i class="fas fa-rocket"></i> RUN ANALYSIS
+                </button>
+
+                <div class="sidebar-stats">
+                    <h4>📊 QUICK STATS</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">Cities Analyzed</span>
+                        <span class="stat-value">20</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Carbon Credits</span>
+                        <span class="stat-value">2.7k+</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Analysis Time</span>
+                        <span class="stat-value">5 sec</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="welcome-hero">
+                    <div class="welcome-icon">
+                        <i class="fas fa-hand-wave"></i>
+                    </div>
+                    <h2>Welcome to E-FDT Platform</h2>
+                    <p>India's most advanced AI-powered platform for sustainable urban development</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>⚡ 5-Second Analysis</h3>
+                        <p>Traditional methods take 6-12 months and cost ₹50 Lakh. We deliver comprehensive analysis in just 5 seconds.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>💎 Carbon Credit Verification</h3>
+                        <p>Automatically verify carbon credits using Gold Standard methodology. Earn ₹50 Lakh+ per year from verified credits.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>⚖️ Environmental Justice</h3>
+                        <p>3x algorithmic priority for low-income areas. Our AI ensures poor communities benefit first, not last.</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-section">
+                        <h3><i class="fas fa-bullseye"></i> What We Analyze</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>Site Suitability</strong> - 15+ factors including demographics, infrastructure & environment</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Carbon Credits</strong> - Gold Standard verification with market valuation</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Compliance</strong> - Indian Green Building, LEED India, Net Zero 2070</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Climate Scenarios</strong> - Test against 5 IPCC warming scenarios</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Financial Model</strong> - Complete ROI analysis with payback period</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Social Impact</strong> - UN SDG alignment & job creation</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Blockchain Audit</strong> - Immutable & transparent records</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3><i class="fas fa-chart-line"></i> Platform Features</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>Interactive Maps</strong> - Real-time geospatial visualizations</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Real-time Analytics</strong> - Dynamic charts & comprehensive insights</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Gamified Engagement</strong> - Community participation scoring</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Blockchain Verified</strong> - Tamper-proof decision tracking</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Export Options</strong> - Download CSV, JSON & PDF reports</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>20 Indian Cities</strong> - Complete coverage of major metros</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>🚀 Ready to Get Started?</h3>
+                    <p>Configure your analysis parameters in the sidebar and click "RUN ANALYSIS" to begin your 5-second transformation</p>
+                </div>
+            </div>
+
+            <!-- Results Screen (Hidden Initially) -->
+            <div id="resultsScreen" class="results-screen" style="display: none;">
+                <!-- Loading Animation -->
+                <div id="loadingSpinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>🔄 Analyzing city data with AI...</p>
+                </div>
+
+                <!-- KPI Dashboard -->
+                <div id="kpiSection" class="kpi-section" style="display: none;">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Key Performance Indicators</h2>
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon"><i class="fas fa-gem"></i></div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Carbon Credits</div>
+                                <div class="kpi-value" id="carbonCredits">0</div>
+                                <div class="kpi-delta" id="carbonDelta">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Compliance Grade</div>
+                                <div class="kpi-value" id="complianceGrade">-</div>
+                                <div class="kpi-delta" id="complianceDelta">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon"><i class="fas fa-temperature-high"></i></div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Climate Viability</div>
+                                <div class="kpi-value" id="climateViability">0%</div>
+                                <div class="kpi-delta" id="climateDelta">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon"><i class="fas fa-rupee-sign"></i></div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Return on Investment</div>
+                                <div class="kpi-value" id="roiValue">0%</div>
+                                <div class="kpi-delta" id="roiDelta">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon"><i class="fas fa-users"></i></div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Jobs Created</div>
+                                <div class="kpi-value" id="jobsCreated">0</div>
+                                <div class="kpi-delta">Green Jobs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Tabs -->
+                <div id="tabsSection" class="tabs-section" style="display: none;">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="map">
+                            <i class="fas fa-map-marked-alt"></i> Interactive Map
+                        </button>
+                        <button class="tab-btn" data-tab="carbon">
+                            <i class="fas fa-leaf"></i> Carbon & Financial
+                        </button>
+                        <button class="tab-btn" data-tab="compliance">
+                            <i class="fas fa-clipboard-check"></i> Compliance & Climate
+                        </button>
+                        <button class="tab-btn" data-tab="impact">
+                            <i class="fas fa-heart"></i> Social Impact
+                        </button>
+                        <button class="tab-btn" data-tab="sites">
+                            <i class="fas fa-trophy"></i> Top 5 Sites
+                        </button>
+                        <button class="tab-btn" data-tab="blockchain">
+                            <i class="fas fa-cube"></i> Blockchain Audit
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Map Tab -->
+                        <div id="mapTab" class="tab-pane active">
+                            <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Interactive Site Map</h2>
+                            <div id="map" class="map-container"></div>
+                            <div class="map-legend">
+                                <h4>🗺️ Map Legend:</h4>
+                                <div class="legend-item">
+                                    <span class="legend-marker gold"></span>
+                                    <span><strong>Top 5 Sites</strong> - Highest suitability scores</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker red"></span>
+                                    <span><strong>Green Gap Areas</strong> - Limited park access (priority zones)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker green"></span>
+                                    <span><strong>Adequate Access</strong> - Good green coverage</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carbon Tab -->
+                        <div id="carbonTab" class="tab-pane">
+                            <h2 class="section-title"><i class="fas fa-leaf"></i> Carbon Credit Verification</h2>
+                            <div class="content-grid">
+                                <div class="content-card">
+                                    <h3>Gold Standard Verification</h3>
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Factor</th>
+                                                <th>Score</th>
+                                                <th>Percentage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="verificationTable">
+                                            <tr><td colspan="3">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="summary-box" id="carbonSummary">
+                                        <p><strong>Total CO₂ Reduction:</strong> <span id="totalCO2">-</span> tons/year</p>
+                                        <p><strong>Verified Credits:</strong> <span id="verifiedCredits">-</span> tons</p>
+                                        <p><strong>Market Value:</strong> <span id="marketValue">-</span></p>
+                                    </div>
+                                </div>
+                                <div class="content-card">
+                                    <h3>CO₂ Reduction by Site</h3>
+                                    <canvas id="co2Chart"></canvas>
+                                </div>
+                            </div>
+
+                            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> Financial Analysis</h2>
+                            <div class="financial-grid">
+                                <div class="financial-card">
+                                    <h4>💰 Investment</h4>
+                                    <p><strong>Initial Cost:</strong> <span id="initialCost">-</span></p>
+                                    <p><strong>Green Grants:</strong> <span id="greenGrants">-</span></p>
+                                    <p><strong>Net Cost:</strong> <span id="netCost">-</span></p>
+                                </div>
+                                <div class="financial-card">
+                                    <h4>📈 Annual Returns</h4>
+                                    <p><strong>Project Benefits:</strong> <span id="annualBenefits">-</span></p>
+                                    <p><strong>Carbon Revenue:</strong> <span id="carbonRevenue">-</span></p>
+                                    <p><strong>Total Annual:</strong> <span id="totalAnnual">-</span></p>
+                                </div>
+                                <div class="financial-card">
+                                    <h4>🎯 Performance</h4>
+                                    <p><strong>ROI:</strong> <span id="roiPercent">-</span></p>
+                                    <p><strong>Payback Period:</strong> <span id="paybackPeriod">-</span></p>
+                                    <p><strong>5-Year Net:</strong> <span id="fiveYearNet">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Compliance Tab -->
+                        <div id="complianceTab" class="tab-pane">
+                            <h2 class="section-title"><i class="fas fa-tasks"></i> Regulatory Compliance</h2>
+                            <div class="content-grid">
+                                <div class="content-card">
+                                    <h3 id="complianceFrameworkTitle">Compliance Framework</h3>
+                                    <p><strong>Compliance Rate:</strong> <span id="complianceRate">-</span></p>
+                                    <p><strong>Grade:</strong> <span id="complianceGradeDetail">-</span></p>
+                                    <table class="data-table" id="complianceTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Criterion</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td colspan="2">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="content-card">
+                                    <canvas id="complianceChart"></canvas>
+                                </div>
+                            </div>
+
+                            <h2 class="section-title"><i class="fas fa-cloud"></i> Climate Scenario Analysis</h2>
+                            <div class="content-grid">
+                                <div class="content-card">
+                                    <h3 id="climateScenarioTitle">Climate Scenario</h3>
+                                    <p><strong>Temperature Rise:</strong> <span id="tempRise">-</span></p>
+                                    <p><strong>Sea Level Rise:</strong> <span id="seaLevelRise">-</span></p>
+                                    <p><strong>Average Viability:</strong> <span id="avgViability">-</span></p>
+                                    <p><strong>Recommendation:</strong> <span id="recommendation">-</span></p>
+                                    <div id="viabilityAlert" class="alert"></div>
+                                </div>
+                                <div class="content-card">
+                                    <canvas id="climateChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Impact Tab -->
+                        <div id="impactTab" class="tab-pane">
+                            <h2 class="section-title"><i class="fas fa-heart"></i> Social Impact & Citizen Engagement</h2>
+                            <div class="content-grid">
+                                <div class="content-card">
+                                    <h3>UN SDG Alignment</h3>
+                                    <canvas id="sdgChart"></canvas>
+                                    <p class="metric-highlight">Average SDG Alignment: <strong id="avgSDG">-</strong></p>
+                                </div>
+                                <div class="content-card">
+                                    <h3>Employment Impact</h3>
+                                    <canvas id="jobsChart"></canvas>
+                                    <p class="metric-highlight">Total Jobs Created: <strong id="totalJobs">-</strong></p>
+                                </div>
+                            </div>
+
+                            <h2 class="section-title"><i class="fas fa-gamepad"></i> Citizen Engagement Scores</h2>
+                            <div class="table-container">
+                                <table class="data-table" id="engagementTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Site</th>
+                                            <th>Accessibility</th>
+                                            <th>Health Benefit</th>
+                                            <th>Transparency</th>
+                                            <th>Local Jobs</th>
+                                            <th>Overall</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="6">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2 class="section-title"><i class="fas fa-balance-scale-right"></i> Environmental Justice</h2>
+                            <div class="justice-grid">
+                                <div class="justice-card">
+                                    <div class="justice-value" id="lowIncomeCount">0/5</div>
+                                    <div class="justice-label">Low-Income Sites Prioritized</div>
+                                    <div class="justice-delta" id="lowIncomeDelta">0% of top sites</div>
+                                </div>
+                                <div class="justice-card">
+                                    <div class="justice-value" id="gentrifRisk">0.00</div>
+                                    <div class="justice-label">Avg Gentrification Risk</div>
+                                    <div class="justice-delta" id="gentrifStatus">Low Risk</div>
+                                </div>
+                                <div class="justice-card">
+                                    <div class="justice-value" id="greenGapsSolved">0/5</div>
+                                    <div class="justice-label">Green Gaps Addressed</div>
+                                    <div class="justice-delta" id="residentsServed">Serving 0 residents</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sites Tab -->
+                        <div id="sitesTab" class="tab-pane">
+                            <h2 class="section-title"><i class="fas fa-trophy"></i> Top 5 Recommended Sites</h2>
+                            <div id="sitesAccordion" class="accordion">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Blockchain Tab -->
+                        <div id="blockchainTab" class="tab-pane">
+                            <h2 class="section-title"><i class="fas fa-cube"></i> Blockchain Audit Trail</h2>
+                            <div class="info-box">
+                                <p><strong>🔐 What is Blockchain Audit?</strong></p>
+                                <p>Every decision in this analysis is permanently recorded on an immutable blockchain ledger. 
+                                This ensures complete transparency, prevents tampering, and provides legal proof of compliance.</p>
+                            </div>
+                            <div id="blockchainEntries" class="blockchain-container">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div id="downloadSection" class="download-section" style="display: none;">
+                    <h2 class="section-title"><i class="fas fa-download"></i> Export & Download</h2>
+                    <div class="download-grid">
+                        <button class="btn-download" id="downloadCSV">
+                            <i class="fas fa-file-csv"></i> Download Sites Data (CSV)
+                        </button>
+                        <button class="btn-download" id="downloadJSON">
+                            <i class="fas fa-file-code"></i> Download Blockchain Audit (JSON)
+                        </button>
+                        <button class="btn-download" id="downloadPDF">
+                            <i class="fas fa-file-pdf"></i> Download Summary Report (PDF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <p><strong>E-FDT Platform v1.0</strong> | Environmental & Financial Digital Twin</p>
+            <p>© 2025 | Powered by AI for Sustainable Development 🌍</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
