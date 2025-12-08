@@ -119,7 +119,7 @@ edft-platform/
 ├── assets/             # Images, icons, etc.
 └── README.md           # This file
 
-
+special techstack used is AWS for best configuration like S3 , lambda , Amazon Q , CloudFront
 ---
 
 ## 🔑 Environment Variables
